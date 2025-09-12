@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { verifyToken } from '../api/auth';
 import AdminPanel from '../../components/AdminPanel';
 import StudentPanel from '../../components/StudentPanel';
+import TeacherPanel from '../../components/TeacherPanel';
 
 export default function DashboardPage() {
 
@@ -65,6 +66,7 @@ export default function DashboardPage() {
       </nav>
       <main className="pt-6">
         {role === 'ADMIN' && <AdminPanel name={name} />}
+        {role === 'DOCENTE' && <TeacherPanel name={name} />}
         {role === 'ESTUDIANTE' && <StudentPanel name={name} />}
       </main>
     </div>
