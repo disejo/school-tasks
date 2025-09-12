@@ -144,6 +144,11 @@ export default function App() {
             return;
         }
 
+        if (!studentData) {
+            showMessage("Los datos del estudiante aún no se han cargado.", "error");
+            return;
+        }
+
         const newActivities = studentData.actividades ? [...studentData.actividades, { ...newActivity, id: crypto.randomUUID() }] : [{ ...newActivity, id: crypto.randomUUID() }];
         
         try {
@@ -266,7 +271,11 @@ export default function App() {
                 </div>
 
                 {isAdmin && (
-                    <button onClick={() => setShowModal(true)} className="mb-4 bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors self-start">
+                    <button
+                        onClick={() => setShowModal(true)}
+                        className="mb-4 bg-green-600 text-white font-semibold py-2 px-4 rounded-lg hover:bg-green-700 transition-colors self-start disabled:bg-gray-500"
+                        disabled={!studentData}
+                    >
                         Agregar Nueva Actividad
                     </button>
                 )}
