@@ -1,3 +1,5 @@
-export default function Loading() {
-  return <p>Loading...</p>
+import Loading from '../components/loading';
+
+export default function GlobalLoading() {
+  return <Loading />;
 }
