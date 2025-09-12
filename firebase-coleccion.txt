@@ -1,0 +1,71 @@
+Coleccion - grades
+academicCycleId
+(cadena)
+createdAt
+(marca de tiempo)
+grade
+(número)
+studentId
+(cadena)
+subjectId
+(cadena)
+teacherId
+(cadena)
+trimester
+(número)
+updatedAt
+(marca de tiempo)
+
+Coleccion - subjects
+auxiliarId null
+(nulo)
+createdAt
+(marca de tiempo)
+createdBy
+(cadena)
+description
+(cadena)
+name
+(cadena)
+suplenteId
+(nulo)
+titularId
+(nulo)
+
+Coleccion - classrooms
+createdAt
+(marca de tiempo)
+name
+(cadena)
+
+Coleccion classroom_subjects
+classroomId
+(cadena)
+subjectId
+(cadena)
+
+Coleccion classroom_enrollments
+academicCycleId
+(cadena)
+classroomId
+(cadena)
+enrolledAt
+(marca de tiempo)
+studentId
+(cadena)
+studentName
+(cadena)
+
+Coleccion academicCycles
+createdAt
+(marca de tiempo)
+createdBy
+(cadena)
+endDate
+(cadena)
+isActive
+(booleano)
+name
+(cadena)
+startDate
+(cadena)

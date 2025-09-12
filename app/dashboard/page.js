@@ -12,6 +12,7 @@ export default function DashboardPage() {
 
   const [name, setName] = useState('');
   const [role, setRole] = useState('');
+  const [dni, setDni] = useState('');
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -25,6 +26,7 @@ export default function DashboardPage() {
         return;
       }
       setName(user.name);
+      setDni(user.dni);
       setRole(user.role);
       setLoading(false);
     }
@@ -66,8 +68,8 @@ export default function DashboardPage() {
       </nav>
       <main className="pt-6">
         {role === 'ADMIN' && <AdminPanel name={name} />}
-        {role === 'DOCENTE' && <TeacherPanel name={name} />}
-        {role === 'ESTUDIANTE' && <StudentPanel name={name} />}
+        {role === 'DOCENTE' && <TeacherPanel teacherId={dni} name={name} />}
+        {role === 'ESTUDIANTE' && <StudentPanel studentId={dni} name={name} />}
       </main>
     </div>
   );
