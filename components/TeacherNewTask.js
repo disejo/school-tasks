@@ -3,7 +3,7 @@ import { getClassrooms, getSubjectsByClassroom, getStudentsByClassroom, createTa
 import PrimaryButton from "@/components/primarybutton";
 import SecondaryButton from "@/components/secondarybutton";
 
-export default function TeacherNewTask({ teacherId, onClose }) {
+export default function TeacherNewTask({ teacherId, onClose, onCreated }) {
   const [classrooms, setClassrooms] = useState([]);
   const [selectedClassroom, setSelectedClassroom] = useState("");
   const [subjects, setSubjects] = useState([]);
@@ -39,7 +39,7 @@ export default function TeacherNewTask({ teacherId, onClose }) {
         setStudents(data);
         if (taskType === "tarea") {
           const defaultAchieved = {};
-          data.forEach(s => { defaultAchieved[s.studentId] = "L"; });
+          data.forEach(s => { defaultAchieved[s.studentId] = "NL"; });
           setAchieved(defaultAchieved);
         } else {
           setAchieved({});
@@ -92,10 +92,11 @@ export default function TeacherNewTask({ teacherId, onClose }) {
       setObservation("");
       setAchieved({});
       setTaskType("");
+      if (onCreated) onCreated();
     } finally {
       setLoading(false);
     }
-  }, [selectedClassroom, selectedSubject, date, taskName, observation, teacherId, students, achieved, taskType, isEvaluation]);
+  }, [selectedClassroom, selectedSubject, date, taskName, observation, teacherId, students, achieved, taskType, isEvaluation, onCreated]);
 
   const classroomOptions = useMemo(() => [
     <option value="" key="empty">Selecciona un aula</option>,
