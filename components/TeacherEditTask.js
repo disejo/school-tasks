@@ -60,7 +60,7 @@ export default function TeacherEditTask({ teacherId, taskId, onClose }) {
 
   if (!selectedTask) {
     return (
-      <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+      <div className="flex items-center justify-center bg-gray-100 dark:bg-gray-900">
         <div className="bg-white dark:bg-gray-800 p-8 mx-4 rounded shadow-lg w-full max-w-2xl">
           <div className="text-gray-500 dark:text-gray-400">No se encontró la tarea.</div>
         </div>
@@ -69,7 +69,7 @@ export default function TeacherEditTask({ teacherId, taskId, onClose }) {
   }
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-gray-900">
+    <div className="flex items-center justify-center bg-gray-100 dark:bg-gray-900">
       <div className="bg-white dark:bg-gray-800 p-8 mx-2 rounded shadow-lg w-full">
         <h2 className="text-2xl font-bold mb-6 text-center dark:text-white">Editar tarea</h2>
         <div className="space-y-2 mb-6">

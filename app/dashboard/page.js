@@ -7,6 +7,9 @@ import { verifyToken } from '../api/auth';
 import AdminPanel from '../../components/AdminPanel';
 import StudentPanel from '../../components/StudentPanel';
 import TeacherPanel from '../../components/TeacherPanel';
+import Icon from '@mdi/react';
+import { mdiAccountArrowLeft } from '@mdi/js';
+import { mdiMenuDown } from '@mdi/js';
 
 export default function DashboardPage() {
 
@@ -57,12 +60,16 @@ export default function DashboardPage() {
         <div className="flex items-center gap-3">
           <span className="font-semibold text-lg text-gray-800 dark:text-white">{name}</span>
           <div className="relative group">
-            <button className="px-3 py-2 rounded bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700">
-              🔽
+            <button className="px-3 py-2 rounded bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-white hover:bg-gray-300 dark:hover:bg-gray-700  hover:cursor-pointer"><Icon path={mdiMenuDown} size={1} /></button>
+          <div className="absolute right-0 mt-2 w-20 bg-white dark:bg-gray-800 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-auto">
+            <button 
+              onClick={handleLogout} 
+              className="w-full text-left px-2 py-1 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-800 flex items-center gap-2  hover:cursor-pointer"
+            >
+              <Icon path={mdiAccountArrowLeft} size={1} />
+              <span>Salir</span>
             </button>
-            <div className="absolute right-0 mt-2 w-40 bg-white dark:bg-gray-800 rounded shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-auto">
-              <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 text-red-600">Salir del sistema</button>
-            </div>
+          </div>
           </div>
         </div>
       </nav>
