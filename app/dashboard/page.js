@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import { verifyToken } from '../api/auth';
 import AdminPanel from '../../components/AdminPanel';
 import StudentPanel from '../../components/StudentPanel';
+import { db } from "../../lib/firebase";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import TeacherPanel from '../../components/TeacherPanel';
 import Icon from '@mdi/react';
 import { mdiAccountArrowLeft } from '@mdi/js';
@@ -18,6 +20,8 @@ export default function DashboardPage() {
   const [dni, setDni] = useState('');
   const [loading, setLoading] = useState(true);
   const router = useRouter();
+  const [userDocId, setUserDocId] = useState('');
+
 
   useEffect(() => {
     async function fetchUser() {
@@ -31,10 +35,30 @@ export default function DashboardPage() {
       setName(user.name);
       setDni(user.dni);
       setRole(user.role);
+
+      // Fetch user document ID from Firestore
+      try {
+        const q = query(collection(db, "users"), where("dni", "==", user.dni));
+        const querySnapshot = await getDocs(q);
+        if (!querySnapshot.empty) {
+          querySnapshot.forEach((doc) => {
+            if (doc.exists) {
+              setUserDocId(doc.id);
+            } else {
+              setUserDocId(null);
+            }
+          });
+        } else {
+          console.log("No se encontró el documento.");
+        }
+      } catch (error) {
+        console.error("Error al obtener el documento:", error);
+      }
       setLoading(false);
     }
     fetchUser();
-  }, [router]);
+  }, []);
+
 
   const handleLogout = async () => {
     await fetch('/api/auth/logout', { method: 'POST' });
@@ -74,10 +98,11 @@ export default function DashboardPage() {
         </div>
       </nav>
       <main className="pt-6">
-        {role === 'ADMIN' && <AdminPanel name={name} />}
-        {role === 'DOCENTE' && <TeacherPanel teacherId={dni} name={name} />}
-        {role === 'ESTUDIANTE' && <StudentPanel studentId={dni} name={name} />}
+  {role === 'ADMIN' && <AdminPanel name={name} />}
+  {role === 'DOCENTE' && <TeacherPanel teacherId={dni} name={name} />}
+  {role === 'ESTUDIANTE' && <StudentPanel studentId={userDocId} name={name} />}
       </main>
     </div>
   );
-}
+};
+

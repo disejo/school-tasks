@@ -69,3 +69,29 @@ name
 (cadena)
 startDate
 (cadena)
+
+
+Coleccion task
+classroomId
+(cadena)
+createdAt
+(marca de tiempo)
+date
+(cadena)
+name
+(cadena)
+observation
+(cadena)
+students
+(array)
+-(mapa)
+--studentId
+  (cadena)
+--value
+  (cadena)
+subjectId
+(cadena)
+teacherId
+(cadena)
+type
+"tarea"
